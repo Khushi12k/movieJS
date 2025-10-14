@@ -21,6 +21,9 @@ const apiEndPoint = {
     topRatedMovies: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
     topRatedTvShow:"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
 };
+window.addEventListener("load",()=>{
+    fetchData(apiEndPoint.trendingMovieByDay,trendingSection)
+})
 let imageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
 async function fetchData(url,section) {
