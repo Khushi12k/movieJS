@@ -1,6 +1,10 @@
 let trendingSection = document.querySelector(".trending section");
-let popularSection = document.querySelector("popular section");
-let topRatedSection = document.querySelector("topRated section");
+let trendingMoviesDayBtn=document.querySelector("#trendingMoviesDay")
+let trendingMoviesWeekBtn=document.querySelector("#trendingMoviesWeek")
+let popularMoviesBtn=document.querySelector("#popularMovies")
+let popularTvshowsBtn=document.querySelector("#popularTvshows")
+let topRatedMoviesBtn=document.querySelector("#topRatedMovies")
+let topRatedTvshowsBtn=document.querySelector("#topRatedTvshows")
 
 let options = {
     headers: {
@@ -11,34 +15,58 @@ let options = {
 
 const apiEndPoint = {
     trendingMovieByDay: "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
-    popularMoviesByDay: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
-    topRatedMovies: "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+     trendingMovieByWeek:"https://api.themoviedb.org/3/trending/all/week?language=en-US",
+    popularMovies: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+    popularTvShow:"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+    topRatedMovies: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
+    topRatedTvShow:"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
 };
+let imageBaseUrl = "https://image.tmdb.org/t/p/w500";
 
+async function fetchData(url,section) {
+    let response = await fetch(url, options);
+    let result = await response.json();
 
-let imagebaseUrl = "https://image.tmdb.org/t/p/w500" 
-
-async function fetchData(url, options) {
-    // let finalData = [];
-
-    for (let x in url) {
-        let endpoint = url[x]
-        let response = await fetch(endpoint, options);
-        let result = await response.json();
-        // finalData.push(result);
-
-        for (let i = 0; i < result.results.length; i++) {
-          let heading = document.createElement("h3")
-          let img = document.createElement("img")
-          let posterImage = imagebaseUrl + result.results[i].poster_path
-          img.src = posterImage;
-          heading.innerHTML = result.results[i].title
-          trendingSection.append(heading,img)
-        }
-    }
-
-    console.log(finalData);
-
+    section.innerHTML=""
+    displayData(result.results,section);
 }
 
-fetchData(apiEndPoint, options)
+function displayData(arr,section) {
+    arr.forEach(e => {
+        let div=document.createElement("div")
+        div.classList.add("main")
+        let title=document.createElement("h3")
+        title.textContent=e.title||e.name
+        // let title = e.title;
+        // console.log(title);       
+        let img=document.createElement("img")
+        img.classList.add("image")
+        let image=imageBaseUrl + e.poster_path
+        img.src=image
+         div.append(title,img)
+        section.append(div)
+            
+    });
+}
+
+trendingMoviesDayBtn.addEventListener("click", ()=>{
+fetchData(apiEndPoint.trendingMovieByDay,trendingSection);
+})
+trendingMoviesWeekBtn.addEventListener("click", ()=>{
+fetchData(apiEndPoint.trendingMovieByWeek,trendingSection);
+})
+
+popularMoviesBtn.addEventListener("click",()=>{
+    fetchData(apiEndPoint.popularMovies,trendingSection);
+})
+
+popularTvshowsBtn.addEventListener("click",()=>{
+    fetchData(apiEndPoint.popularTvShow,trendingSection);
+})
+
+topRatedMoviesBtn.addEventListener("click",()=>{
+    fetchData(apiEndPoint.topRatedMovies,trendingSection);
+})
+topRatedTvshowsBtn.addEventListener("clic",()=>{
+     fetchData(apiEndPoint.topRatedMovies,trendingSection);
+})
