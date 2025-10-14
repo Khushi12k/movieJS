@@ -29,6 +29,9 @@ let imageBaseUrl = "https://image.tmdb.org/t/p/w500";
 async function fetchData(url,section) {
     let response = await fetch(url, options);
     let result = await response.json();
+    // console.log(result)
+    // console.log(result.results)
+    
 
     section.innerHTML=""
     displayData(result.results,section);
@@ -46,6 +49,7 @@ function displayData(arr,section) {
         img.classList.add("image")
         let image=imageBaseUrl + e.poster_path
         img.src=image
+        // console.log(img)
          div.append(title,img)
         section.append(div)
             
