@@ -7,6 +7,7 @@ let popularMoviesBtn=document.querySelector("#popularMovies")
 let popularTvshowsBtn=document.querySelector("#popularTvshows")
 let topRatedMoviesBtn=document.querySelector("#topRatedMovies")
 let topRatedTvshowsBtn=document.querySelector("#topRatedTvshows")
+let frontPage=document.querySelector(".front_page")
 
 
 let imageBaseUrl = "https://image.tmdb.org/t/p/w500";
@@ -21,11 +22,31 @@ let options = {
 const apiEndPoint = {
     trendingMovieByDay: "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
     trendingMovieByWeek:"https://api.themoviedb.org/3/trending/all/week?language=en-US",
+
     popularMovies: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
     popularTvShow:"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+
     topRatedMovies: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
     topRatedTvShow:"https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
 };
+
+let backgroundImages=[]
+console.log(backgroundImages)
+
+function getRandomImages(){
+   function getRandomImages(){
+    let randomIndex = Math.floor(Math.random() * backgroundImages.length);
+    let randomImageUrl = backgroundImages[randomIndex];
+    frontPage.style.backgroundImage = `url(${randomImageUrl})`;
+    frontPage.style.backgroundSize = "cover";
+    frontPage.style.backgroundPosition = "center";
+    frontPage.style.backgroundRepeat = "no-repeat";
+}
+getRandomImages()
+
+
+}
+
 window.addEventListener("load",()=>{
   fetchData(apiEndPoint.trendingMovieByDay,trendingSection)
   fetchData(apiEndPoint.popularMovies,popularSection)
@@ -56,11 +77,14 @@ function displayData(arr,section) {
         let img=document.createElement("img")
         img.classList.add("image")
         let image=imageBaseUrl + e.poster_path
+       backgroundImages.push(imageBaseUrl + e.backdrop_path)
+       
         img.src=image
         // console.log(img)
-         div.append(title,img)
-        section.append(div)      
+         div.append(img,title)
+        section.append(div)
     });
+    getRandomImages();
 }
 
 
@@ -82,8 +106,8 @@ popularTvshowsBtn.addEventListener("click",()=>{
 topRatedMoviesBtn.addEventListener("click",()=>{
     fetchData(apiEndPoint.topRatedMovies,topRatedSection);
 })
-topRatedTvshowsBtn.addEventListener("clic",()=>{
-     fetchData(apiEndPoint.topRatedMovies,topRatedSection);
+topRatedTvshowsBtn.addEventListener("click",()=>{
+     fetchData(apiEndPoint.topRatedTvShow,topRatedSection);
 })
 
 
