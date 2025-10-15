@@ -114,6 +114,10 @@ section::-webkit-scrollbar{
     align-items: center;
     gap: 10px; 
     position: relative;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 .front_page input {
@@ -133,14 +137,4 @@ section::-webkit-scrollbar{
     font-size: 18px;
     font-weight: bold;
     cursor: pointer;
-}
-.back_page{
-   width: 100vw;
-    height: 100vh;
-    background-color:rgba(0, 0, 0, 0.4);
-    position: absolute;
-    top:0px;
-    left:0px;
-
-
 }

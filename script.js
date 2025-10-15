@@ -31,16 +31,14 @@ const apiEndPoint = {
 };
 
 let backgroundImages=[]
-console.log(backgroundImages)
+// console.log(backgroundImages)
 
 function getRandomImages(){
    function getRandomImages(){
     let randomIndex = Math.floor(Math.random() * backgroundImages.length);
     let randomImageUrl = backgroundImages[randomIndex];
     frontPage.style.backgroundImage = `url(${randomImageUrl})`;
-    frontPage.style.backgroundSize = "cover";
-    frontPage.style.backgroundPosition = "center";
-    frontPage.style.backgroundRepeat = "no-repeat";
+    
 }
 getRandomImages()
 
