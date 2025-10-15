@@ -20,7 +20,7 @@ let options = {
 
 const apiEndPoint = {
     trendingMovieByDay: "https://api.themoviedb.org/3/trending/movie/day?language=en-US",
-     trendingMovieByWeek:"https://api.themoviedb.org/3/trending/all/week?language=en-US",
+    trendingMovieByWeek:"https://api.themoviedb.org/3/trending/all/week?language=en-US",
     popularMovies: "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
     popularTvShow:"https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
     topRatedMovies: "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
@@ -28,6 +28,8 @@ const apiEndPoint = {
 };
 window.addEventListener("load",()=>{
   fetchData(apiEndPoint.trendingMovieByDay,trendingSection)
+  fetchData(apiEndPoint.popularMovies,popularSection)
+  fetchData(apiEndPoint.topRatedMovies,topRatedSection)
 })
 
 async function fetchData(url,section) {
@@ -57,7 +59,7 @@ function displayData(arr,section) {
         img.src=image
         // console.log(img)
          div.append(title,img)
-        section.append(div)  
+        section.append(div)      
     });
 }
 
