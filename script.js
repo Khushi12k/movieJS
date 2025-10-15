@@ -57,21 +57,10 @@ function displayData(arr,section) {
         img.src=image
         // console.log(img)
          div.append(title,img)
-        section.append(div)
-            
+        section.append(div)  
     });
-     
 }
 
-
-function setWidth() {
-  trendingSection.style.width =
-    trendingSection.children.length * document.body.offsetWidth + "px";
-
-  for (let i = 0; i < trendingSection.children.length; i++) {
-    trendingSection.children[i].style.width = document.body.offsetWidth + "px";
-  }
-}
 
 trendingMoviesDayBtn.addEventListener("click", ()=>{
 fetchData(apiEndPoint.trendingMovieByDay,trendingSection);
